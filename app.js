@@ -1,11 +1,22 @@
 const express = require('express')
 const cors = require('cors')
 const app = express()
+const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
+
+mongoose.connect('mongodb://127.0.0.1:27017/contactbook', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 
 const contactsRouter = require("./app/routes/contact.route");
 const ApiError = require("./app/api-error");
 
-app.use(cors())
+app.use(cookieParser())
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:3001', 'http://localhost:3000', 'http://localhost:8000']
+}))
 app.use(express.json())
 
 app.get('/', (req, res) => {

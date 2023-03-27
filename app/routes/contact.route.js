@@ -7,6 +7,19 @@ const ApiError = require("../api-error");
 
 const router = express.Router()
 
+
+router.route("/user")
+    .get(contacts.user)
+
+router.route("/register")
+    .post(contacts.register)
+
+router.route("/login")
+    .post(contacts.login)
+
+router.route("/logout")
+    .post(contacts.logout)
+
 router.route("/")
     .get(contacts.findAll)
     .post(contacts.create)
@@ -19,5 +32,6 @@ router.route("/:id")
     .get(contacts.findOne)
     .put(contacts.update)
     .delete(contacts.delete)
+
 
 module.exports = router
